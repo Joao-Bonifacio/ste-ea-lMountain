@@ -1,6 +1,6 @@
 # stealMountain
 
-- The branch main is the secure code
-- The honeyPot branch is the vulnerable code
+- The _main_ branch is the secure code
+- The _honeyPot_ branch is the vulnerable code
 
-## It's nade for test vulnerabilitys with code context
+## It's made for test vulnerabilitys with code context
