@@ -5,6 +5,7 @@ export default function Join() {
           <label className="block text-sm font-semibold text-gray-600">Full Name</label>
           <input
             type="text"
+            name="name"
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             placeholder="Your full name"/>
         </div>
@@ -12,6 +13,7 @@ export default function Join() {
           <label className="block text-sm font-semibold text-gray-600">Email</label>
           <input
             type="email"
+            name="email"
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             placeholder="Your email"
           />
@@ -20,6 +22,7 @@ export default function Join() {
           <label className="block text-sm font-semibold text-gray-600">Password</label>
           <input
             type="password"
+            name="password"
             className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             placeholder="Your password"
           />
