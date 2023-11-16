@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, UsePipes } from '@nestjs/common';
-import { UsersJoinPipe } from 'src/pipes/users/user_join.pipe';
+import { UserLoginPipe, UsersJoinPipe } from 'src/pipes/users/user.pipe';
 import { UsersService } from 'src/user/users.service';
 
 @Controller('user')
@@ -11,6 +11,7 @@ export class UsersController {
     return this.auth.autenticate();
   }
   @Post('login')
+  @UsePipes(new UserLoginPipe())
   loginUser(@Body() body) {
     return this.auth.loginUser(body);
   }
