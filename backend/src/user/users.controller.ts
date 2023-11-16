@@ -9,6 +9,10 @@ export class UsersController {
   autenticate() {
     return this.auth.autenticate();
   }
+  @Post('login')
+  loginUser(@Body() body) {
+    return this.auth.loginUser(body);
+  }
   @Post('join')
   postautenticate(@Body() body) {
     return this.auth.joinUser(body);
