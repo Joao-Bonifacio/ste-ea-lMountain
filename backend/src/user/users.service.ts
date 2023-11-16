@@ -1,12 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/database/Prisma.service';
 
 @Injectable()
 export class UsersService {
-  autenticate(body, res) {
-    console.log(body);
-    return res.status(201).stringify(body);
+  constructor(private prisma: PrismaService) {}
+  autenticate() {
+    //verificar jwt
+    return { message: 'ok' };
   }
-  postautenticate(req, res) {
-    return res.status(201).stringify(req);
+  async joinUser(body) {
+    await this.prisma.userModel.create({
+      data: {
+        ...body,
+        staff: 'user',
+      },
+    });
+    return { message: 'cadastrado com sucesso' };
   }
 }
