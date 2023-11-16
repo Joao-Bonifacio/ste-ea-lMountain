@@ -4,17 +4,8 @@ import {
   Injectable,
   PipeTransform,
 } from '@nestjs/common';
-import { z, ZodError } from 'nestjs-zod/z';
-
-const userJoinZ = z
-  .object({
-    name: z.string().max(120),
-    email: z.string().email().max(120),
-    password: z.string().max(120),
-  })
-  .refine((data) => Object.keys(data).length === 3, {
-    message: 'All fields (name, email, password) are required',
-  });
+import { ZodError } from 'nestjs-zod/z';
+import { userJoinZ } from 'src/DTOs/user_joinDTO';
 
 @Injectable()
 export class UsersJoinPipe implements PipeTransform {
