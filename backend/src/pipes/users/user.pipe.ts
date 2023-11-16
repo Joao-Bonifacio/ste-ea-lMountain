@@ -15,7 +15,7 @@ export class UserLoginPipe implements PipeTransform {
       return validate;
     } catch (error) {
       if (error instanceof ZodError) {
-        throw new HttpException('Invalid data', HttpStatus.BAD_REQUEST);
+        throw new HttpException(error.errors, HttpStatus.BAD_REQUEST);
       }
     }
   }
