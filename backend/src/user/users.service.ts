@@ -14,9 +14,7 @@ export class UsersService {
   async loginUser(body) {
     const { email, password } = body;
     const user = await this.prisma.userModel.findUnique({
-      where: {
-        email,
-      },
+      where: { email },
     });
     const checkPasswd = await bcrypt.compare(password, user.password);
     if (!user || !checkPasswd) {
@@ -31,9 +29,7 @@ export class UsersService {
   async joinUser(body) {
     const { name, email, password } = body;
     const userExists = await this.prisma.userModel.findFirst({
-      where: {
-        email,
-      },
+      where: { email },
     });
     const hash = await bcrypt.hash(password, Number(process.env.SALT));
 
