@@ -15,13 +15,14 @@ export class UsersService {
     const { email, password } = body;
     const salt = Number(process.env.SALT);
     const hash = await bcrypt.hash(password, salt);
+    console.log(hash);
     const user = await this.prisma.userModel.findUnique({
       where: {
         email,
       },
     });
-    const checkPasswd = await bcrypt.compare(password, hash);
-    if (!user || checkPasswd) {
+    const checkPasswd = await bcrypt.compare(hash, user.password);
+    if (!user || !checkPasswd) {
       throw new HttpException(
         'Usuário ou senha incorretos!',
         HttpStatus.FORBIDDEN,
@@ -32,7 +33,16 @@ export class UsersService {
 
   async joinUser(body) {
     const { name, email, password } = body;
+    const userExists = await this.prisma.userModel.findFirst({
+      where: {
+        email,
+      },
+    });
     const hash = await bcrypt.hash(password, 12);
+
+    if (userExists) {
+      throw new HttpException('Email já cadastrado!', HttpStatus.FORBIDDEN);
+    }
 
     await this.prisma.userModel.create({
       data: { name, email, password: hash, staff: 'user' },
