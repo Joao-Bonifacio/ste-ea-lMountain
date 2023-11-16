@@ -1,4 +1,4 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { UsersService } from 'src/user/users.service';
 import { PrismaService } from 'src/database/Prisma.service';
 
@@ -7,9 +7,14 @@ export class UsersController {
   constructor(private auth: UsersService, private prisma: PrismaService) {}
 
   @Get('auth')
-  autenticate(@Req() req) {
-    console.log(req.body);
-    return this.auth.autenticate(req);
+  autenticate(@Body() body, @Res() res) {
+    console.log(body);
+    return this.auth.autenticate(body, res);
+  }
+  @Post('auth')
+  postautenticate(@Body() body, @Res() res) {
+    console.log(body);
+    return this.auth.postautenticate(body, res);
   }
 
   @Get()
