@@ -32,11 +32,11 @@ const Join: NextPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.get('http://localhost:8080/user/auth')
+      const response = await axios.post('http://localhost:8080/user/join')
       if (response.status === 201) { 
-        //console.log("ok")
+        console.log("ok")
       }else {
-        //console.log("erro")
+        console.log("erro")
       }
       
     } catch (error) {

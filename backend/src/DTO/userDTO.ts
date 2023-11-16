@@ -6,22 +6,8 @@ export const userLoginZ = z
     password: z.string().max(120),
   })
   .refine((data) => Object.keys(data).length === 2, {
-    message: 'All fields (name, email, password) are required',
-  })
-  .refine(
-    (data) => {
-      const allowedFields = ['name', 'password'];
-      const receivedFields = Object.keys(data);
-      const invalidFields = receivedFields.filter(
-        (field) => !allowedFields.includes(field),
-      );
-      if (invalidFields.length > 0) {
-        throw new Error(`Invalid fields: ${invalidFields.join(', ')}`);
-      }
-      return true;
-    },
-    { message: 'Invalid fields provided' },
-  );
+    message: 'All fields are required',
+  });
 
 export const userJoinZ = z
   .object({
@@ -30,7 +16,7 @@ export const userJoinZ = z
     password: z.string().max(120),
   })
   .refine((data) => Object.keys(data).length === 3, {
-    message: 'All fields (name, email, password) are required',
+    message: 'All fields are required',
   })
   .refine(
     (data) => {
