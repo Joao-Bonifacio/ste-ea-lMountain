@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { NextPage } from 'next';
 import axios from 'axios';
-
 interface data {
   name: string;
   email: string;
@@ -28,19 +27,19 @@ const Join: NextPage = () => {
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
-  ): Promise<any> => {
+  ): Promise<void> => {
     e.preventDefault();
-
+  
     try {
-      const response = await axios.post('http://localhost:8080/user/join')
-      if (response.status === 201) { 
-        console.log("ok")
-      }else {
-        console.log("erro")
+      const response = await axios.post('http://172.29.45.36:8080/user/join', data);
+  
+      if (response.status === 201) {
+        console.log('Registration successful');
+      } else {
+        console.log('Error during registration');
       }
-      
     } catch (error) {
-      console.error('Erro ao processar a requisição:', error);
+      console.error('Error processing the request:', error);
     }
   };
 
