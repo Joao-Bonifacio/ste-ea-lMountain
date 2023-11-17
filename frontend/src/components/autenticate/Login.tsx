@@ -1,17 +1,19 @@
 'use client'
-import { useState } from 'react';
-import { NextPage } from 'next';
-import axios from 'axios';
+import { useState } from "react"
+import axios from "axios"
+import { redirect } from 'next/navigation'
+
 interface data {
   email: string;
   password: string;
 }
 
-const Login: NextPage = () => {
+const Login = () => {
+  const [submit, setSubmit] = useState(false)
   const [data, setdata] = useState<data>({
     email: '',
     password: '',
-  });
+  })
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -20,28 +22,25 @@ const Login: NextPage = () => {
     setdata({
       ...data,
       [name]: value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
-    e.preventDefault();
+    e.preventDefault()
   
     try {
-      const response = await axios.post('http://172.29.45.36:8080/user/login', data);
-  
+      const response = await axios.post('http://172.29.45.36:8080/user/login', data)
       if (response.status === 201) {
-        console.log('Login successful');
-      } else {
-        console.log('Error during login');
+        setSubmit(true)
       }
     } catch (error) {
-      console.error('Error processing the request:', error);
+      console.error('Error processing the request:', error)
     }
-  };
+  }
 
-  return (
+  return !submit ? (
     <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-semibold text-gray-600">Email</label>
@@ -72,7 +71,7 @@ const Login: NextPage = () => {
           Login
         </button>
     </form>
-  );
-};
+  ): redirect('/home')
+}
 
-export default Login;
+export default Login
