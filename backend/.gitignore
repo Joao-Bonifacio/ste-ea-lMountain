@@ -39,4 +39,4 @@ lerna-debug.log*
 dev.db
 
 # Env
-.env
+*.env*

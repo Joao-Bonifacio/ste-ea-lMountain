@@ -1,23 +1,31 @@
-import { Body, Controller, Get, Post, UsePipes } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Headers,
+  Post,
+  Res,
+  UsePipes,
+} from '@nestjs/common';
 import { UserLoginPipe, UsersJoinPipe } from 'src/pipes/users/user.pipe';
 import { UsersService } from 'src/user/users.service';
 
 @Controller('user')
 export class UsersController {
-  constructor(private auth: UsersService) {}
+  constructor(private user: UsersService) {}
 
   @Get('auth')
-  autenticate() {
-    return this.auth.autenticate();
+  autenticate(@Headers() headers) {
+    return this.user.autenticate(headers);
   }
   @Post('login')
   @UsePipes(new UserLoginPipe())
-  loginUser(@Body() body) {
-    return this.auth.loginUser(body);
+  loginUser(@Body() body, @Res() res) {
+    return this.user.loginUser(body, res);
   }
   @Post('join')
   @UsePipes(new UsersJoinPipe())
-  postautenticate(@Body() body) {
-    return this.auth.joinUser(body);
+  postautenticate(@Body() body, @Res() res) {
+    return this.user.joinUser(body, res);
   }
 }

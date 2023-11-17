@@ -9,6 +9,8 @@ interface data {
 }
 
 const Login = () => {
+  axios.defaults.baseURL = 'http://172.29.45.36:8080';
+  axios.defaults.withCredentials = true
   const [submit, setSubmit] = useState(false)
   const [data, setdata] = useState<data>({
     email: '',
@@ -29,7 +31,6 @@ const Login = () => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault()
-  
     try {
       const response = await axios.post('http://172.29.45.36:8080/user/login', data)
       if (response.status === 201) {
