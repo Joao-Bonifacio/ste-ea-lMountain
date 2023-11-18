@@ -8,7 +8,6 @@ export class UsersService {
   constructor(private prisma: PrismaService, private jwt: AuthServiceJWT) {}
 
   autenticate(req, res) {
-    console.log(req);
     const cookie = req['cookie'];
     if (req.justVerify) {
       if (!cookie) {
@@ -16,8 +15,6 @@ export class UsersService {
       }
       res.json({ message: 'GoTo Home' });
     }
-
-    return this.jwt.verifyToken(cookie.split('=')[1]);
   }
 
   async loginUser(body, res) {
@@ -34,7 +31,7 @@ export class UsersService {
     }
     const payload = { id: user.id, name: user.name };
     const token = await this.jwt.genToken(payload);
-    //res.cookie();
+    res.clearCookie();
     res.cookie('token', token, { httpOnly: true });
     return res.json({ message: 'Login successful', user });
   }
@@ -57,7 +54,6 @@ export class UsersService {
     const payload = { id, name };
     console.log(payload);
     const token = await this.jwt.genToken(payload);
-    //res.cookie();
     res.cookie('token', token, { httpOnly: true });
     return { message: 'cadastrado com sucesso' };
   }
