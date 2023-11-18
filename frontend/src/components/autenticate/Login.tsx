@@ -31,13 +31,9 @@ const Login = () => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault()
-    try {
-      const response = await axios.post('http://172.29.45.36:8080/user/login', data)
-      if (response.status === 201) {
-        setSubmit(true)
-      }
-    } catch (error) {
-      console.error('Error processing the request:', error)
+    const response = await axios.post('http://172.29.45.36:8080/user/login', data)
+    if (response.status === 201) {
+      setSubmit(true)
     }
   }
 

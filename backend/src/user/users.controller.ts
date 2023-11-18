@@ -15,8 +15,8 @@ export class UsersController {
   constructor(private user: UsersService) {}
 
   @Get('auth')
-  autenticate(@Headers() headers) {
-    return this.user.autenticate(headers);
+  autenticate(@Headers() headers, @Res({ passthrough: true }) res: Response) {
+    return this.user.autenticate(headers, res);
   }
   @Post('login')
   @UsePipes(new UserLoginPipe())

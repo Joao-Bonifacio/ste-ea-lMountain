@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import { redirect } from "next/navigation"
 
-const Login = () => {
+const Join = () => {
   axios.defaults.baseURL = 'http://172.29.45.36:8080';
   axios.defaults.withCredentials = true
   const [submit, setSubmit] = useState(false)
@@ -32,8 +32,6 @@ const Login = () => {
 
       if (response.status === 201) {
         setSubmit(true)
-      } else {
-        console.log('Error during login')
       }
     } catch (error) {
       console.error('Error processing the request:', error)
@@ -85,4 +83,4 @@ const Login = () => {
   ): redirect('/home')
 }
 
-export default Login
+export default Join

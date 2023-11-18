@@ -1,13 +1,9 @@
-'use client'
-import { redirect } from "next/navigation"
-import auth from "@hooks/isSession"
+import auth from "@hooks/auth"
 
-// eslint-disable-next-line @next/next/no-async-client-component
 export default async function SwitchPage() {
-  const isSession = auth()
-  const cookie = document.cookie
-  if(!cookie.includes("token=")) {
-    document.cookie = "token=preset"
-  }
-  return isSession ? redirect('/home') : redirect('/auth')
+  const autenticate = await auth()
+  console.log(autenticate)
+
+  return <></>
+  //return await isSession ? redirect('/home') : redirect('/auth')
 }
