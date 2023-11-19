@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { AuthServiceJWT } from 'src/auth/auth.service';
 import { PrismaService } from 'src/database/Prisma.service';
 
@@ -6,8 +6,9 @@ import { PrismaService } from 'src/database/Prisma.service';
 export class HomeService {
   constructor(private jwt: AuthServiceJWT, private prisma: PrismaService) {}
 
-  async getUserByToken(headers) {
-    const { id } = await this.jwt.verifyToken(headers['cookie'].split('=')[1]);
+  async getUserByToken(requestToken) {
+    const token = JSON.parse(requestToken).value;
+    const { id } = await this.jwt.verifyToken(token);
     const user = await this.prisma.userModel.findUnique({
       where: { id },
     });

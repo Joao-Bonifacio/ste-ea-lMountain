@@ -28,7 +28,7 @@ const Join = () => {
     e.preventDefault()
 
     try {
-      const response = await axios.post('http://172.29.45.36:8080/user/join', data)
+      const response = await axios.post('/user/join', data)
 
       if (response.status === 201) {
         setSubmit(true)

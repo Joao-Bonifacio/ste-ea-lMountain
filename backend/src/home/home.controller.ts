@@ -1,11 +1,14 @@
-import { Controller, Get, Headers } from '@nestjs/common';
+import { Controller, Get, Headers, UseGuards } from '@nestjs/common';
 import { HomeService } from './home.service';
+import { JwtGuard } from 'src/guards/jwt.guard';
 
 @Controller('home')
 export class HomeController {
   constructor(private home: HomeService) {}
+
   @Get()
-  getUserByToken(@Headers() headers) {
-    return this.home.getUserByToken(headers);
+  @UseGuards(JwtGuard)
+  getUserByToken(@Headers('token') token: string) {
+    return this.home.getUserByToken(token);
   }
 }
