@@ -5,5 +5,4 @@ export default async function SwitchPage() {
   console.log(autenticate)
 
   return <></>
-  //return await isSession ? redirect('/home') : redirect('/auth')
 }

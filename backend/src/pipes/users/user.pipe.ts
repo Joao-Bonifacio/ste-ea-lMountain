@@ -5,7 +5,7 @@ import {
   PipeTransform,
 } from '@nestjs/common';
 import { ZodError } from 'nestjs-zod/z';
-import { userLoginZ, userJoinZ } from 'src/DTO/userDTO';
+import { userLoginZ, userJoinZ } from 'src/types/userDTO';
 
 @Injectable()
 export class UserLoginPipe implements PipeTransform {
