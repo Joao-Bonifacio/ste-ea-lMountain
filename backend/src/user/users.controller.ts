@@ -4,6 +4,7 @@ import {
   Get,
   Headers,
   Post,
+  Req,
   Res,
   UsePipes,
 } from '@nestjs/common';
@@ -27,5 +28,12 @@ export class UsersController {
   @UsePipes(new UsersJoinPipe())
   postautenticate(@Body() body, @Res() res) {
     return this.user.joinUser(body, res);
+  }
+  @Get('logout')
+  logout(@Req() req, @Headers() headers, @Res() res) {
+    console.log(req, '\n');
+    console.log(headers);
+    res.clearCookie('token', { httpOnly: true /*, path: '/'*/ });
+    return { message: 'Deslogado' };
   }
 }

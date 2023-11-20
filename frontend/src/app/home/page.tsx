@@ -1,6 +1,7 @@
-import axios from "axios"
-import { redirect } from "next/navigation";
+//import { redirect } from "next/navigation"
 import { cookies } from "next/headers"
+import axios from "axios"
+import Header from "@/components/Header"
 
 export default async function Home() {
   axios.defaults.baseURL = 'http://172.29.45.36:8080';
@@ -10,12 +11,12 @@ export default async function Home() {
       headers: { token: JSON.stringify(cookies().get('token')) }
     })
     return (
-    <div>    
-      <h1>Olá {response.data.name.split(' ')[0]}</h1>
+    <div className="min-h-screen">
+      <Header title={'Olá '+response.data.name.split(' ')[0]}/>
     </div>
     )
   } catch (error) {
-    redirect('/auth')
+    console.log(error)
+    //redirect('/auth')
   }
-  
 }
