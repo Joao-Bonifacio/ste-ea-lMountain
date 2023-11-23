@@ -1,4 +1,4 @@
-//import { redirect } from "next/navigation"
+import { redirect } from "next/navigation"
 import { cookies } from "next/headers"
 import axios from "axios"
 import Header from "@/components/Header"
@@ -17,6 +17,6 @@ export default async function Home() {
     )
   } catch (error) {
     console.log(error)
-    //redirect('/auth')
+    return redirect('/auth')
   }
 }
