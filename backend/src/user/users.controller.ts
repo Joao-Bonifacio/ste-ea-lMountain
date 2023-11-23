@@ -29,11 +29,12 @@ export class UsersController {
   postautenticate(@Body() body, @Res() res) {
     return this.user.joinUser(body, res);
   }
-  @Get('logout')
-  logout(@Req() req, @Headers() headers, @Res() res) {
-    console.log(req, '\n');
+  @Post('logout')
+  logout(@Headers() headers, @Res() res) {
+    const faketoken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFkMjAyMjY4LWRhOWMtNDYxYi1hYzZhLTBjMGI0MDQ4YWEwOCIsIm5hbWUi2iJKbuOjbyBKw7puaW9yIiwiaWF0IooxNzAwNjkzOTU1LCJleHAiujE3MDA3ODAzNTV9.FLVwLFNYIOP4zFW7hEyfJPi57gh3lmKMLxww97YAvqa';
     console.log(headers);
-    res.clearCookie('token', { httpOnly: true /*, path: '/'*/ });
-    return { message: 'Deslogado' };
+    res.cookie('token', faketoken, { httpOnly: true });
+    return res.json({ message: 'Deslogado' });
   }
 }
