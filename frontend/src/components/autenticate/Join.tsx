@@ -3,7 +3,7 @@ import axios from "axios"
 import { redirect } from "next/navigation"
 
 const Join = () => {
-  axios.defaults.baseURL = 'http://172.29.45.36:8080';
+  axios.defaults.baseURL = 'http://localhost:8080';
   axios.defaults.withCredentials = true
   const [submit, setSubmit] = useState(false)
   const [data, setdata] = useState({

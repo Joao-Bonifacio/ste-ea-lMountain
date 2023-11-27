@@ -4,7 +4,7 @@ import axios from "axios"
 import Header from "@/components/Header"
 
 export default async function Home() {
-  axios.defaults.baseURL = 'http://172.29.45.36:8080';
+  axios.defaults.baseURL = 'http://localhost:8080'
   axios.defaults.withCredentials = true
   try {
     const response = await axios.get('/home',{

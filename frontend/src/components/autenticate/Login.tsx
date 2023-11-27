@@ -9,7 +9,7 @@ interface data {
 }
 
 const Login = () => {
-  axios.defaults.baseURL = 'http://172.29.45.36:8080';
+  axios.defaults.baseURL = 'http://localhost:8080';
   axios.defaults.withCredentials = true
   const [submit, setSubmit] = useState(false)
   const [data, setdata] = useState<data>({

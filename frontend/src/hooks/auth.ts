@@ -2,7 +2,7 @@ import { redirect } from "next/navigation"
 import axios from 'axios';
 
 export default async function SwitchPage() {
-    axios.defaults.baseURL = 'http://172.29.45.36:8080';
+    axios.defaults.baseURL = 'http://localhost:8080';
     axios.defaults.withCredentials = true;
 
     try {
